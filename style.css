@@ -1,0 +1,243 @@
+/*
+Theme Name: IGAsVOICETheme
+Theme URI: http://dahngeek.com/
+Description: Tema personalizado y original para IGAsVOICE
+Author: DiagramacionTeamIGA
+Version: 2.0
+Tags: iga, team, igasvoice
+*/
+.clearfix {
+  content:"";
+  display:table;
+  clear:both;
+}
+#barraLat {
+  width: 95%;
+  margin: 10px auto;
+}
+#barraLat .widget {
+  margin: 5px 0px;
+}
+#barraLat .widget li {
+  list-style: none;
+}
+#barraLat .widget li a {
+  text-decoration: none;
+  color: #122a40;
+  background: #fff;
+  padding: 3px;
+  border-radius: 3px;
+  line-height: 28px;
+}
+
+iframe{
+  max-width: 100%;
+}
+
+#barraLat .widget li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: #1F4A6F;
+  padding: 3px;
+  border-radius: 3px;
+  margin: 5px 0px;
+}
+#postInfo {
+	width: 100%;
+	font-size: 80%;
+	background: #fff;
+	color: #000;
+	font-family: 'Verdana', sans-serif, 'Arial';
+  padding: 10px;
+  float: right;
+  margin-bottom: 10px;
+}
+
+div.contenidoNoticia {
+	padding: 5px;
+font-family: 'Open Sans', sans-serif !important;
+  font-size: 120%;
+  line-height: 117%;
+}
+/* Contenido editor noticias */
+
+.wp-caption {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+    height: auto;
+}
+.wp-caption .wp-caption-text {
+    position: absolute;
+    bottom: 3px;
+    color: #fff;
+    max-width: 98%;
+    padding: 4px;
+    font-style: italic;
+    background: rgba(0,0,0,0.7);
+}
+code {
+    color: #095592;
+}
+img {
+	  max-width: 100%;
+}
+img.alignright {
+    float: right;
+    margin: 3px;
+}
+img.size-thumbnail {
+    border: 1px solid #0099ff;
+}
+img.size-thumbnail:hover {
+    border: 1px solid #0066cc;
+}
+.aligncenter {
+    margin: 3px auto;
+}
+img.alignleft {
+    float: left;
+    margin: 3px;
+}
+div.contenidoNoticia ul li {
+      list-style: none;
+padding-left: 15px;
+}
+/*Alineaciones de wordpresss*/
+.alignleft {
+    float: left;
+    margin:0 15px 30px 0;
+}
+.aligncenter {
+    display: block;
+    margin: 0 auto 30px auto;
+}
+.alignright {
+    float: right;
+    margin:0 0 30px 15px;
+}
+.alignnone {
+    float: none;
+    display:block;
+    margin:0 0 30px 0;
+}
+.size-full {
+    width:100%;
+    height:auto;
+    margin:0 0 30px 0;
+}
+p .alignleft {
+    float: left;
+    margin:5px 15px 30px 0;
+}
+p .aligncenter {
+    display: block;
+    margin: 5px auto 30px auto;
+}
+p .alignright {
+    float: right;
+    margin:5px 0 30px 15px;
+}
+p .alignnone {
+    float: none;
+    display:block;
+    margin:5px 0 30px 0;
+}
+p .size-full {
+    width:100%;
+    height:auto;
+    margin:5px 0 30px 0;
+}
+
+div.contenidoNoticia ul li:before {
+      /* For a round bullet */
+      content:'\2022';
+      /* For a square bullet */
+      /*content:'\25A0';*/
+      display: block;
+      position: relative;
+      max-width: 0px;
+      max-height: 0px;
+      left: -21px;
+      top: -4px;
+      color: #0099cc;
+      font-size: 300%;
+      padding: 0px;
+}
+div.contenidoNoticia ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+div.contenidoNoticia ol li {
+    margin-bottom: 5px;
+}
+div.contenidoNoticia ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+}
+
+div.contenidoNoticia ol li:before{
+    font-family: 'Raleway-Bold', Arial,Helvetica;
+    content: counter(li);
+    counter-increment: li;
+    display: inline-block;
+    color: #fff;
+    margin-right: 2px;
+    background: #0099ff;
+    height: 100%;
+    width: 20px;
+    text-align: center;
+}
+div.contenidoNoticia ol ol li:before {
+    background: #0066ff;
+}
+th {
+    overflow: hidden;
+  background: rgb(9,85,146); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(9,85,146,1) 0%, rgba(18,113,175,1) 6%, rgba(18,113,175,1) 50%, rgba(9,85,146,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(9,85,146,1)), color-stop(6%,rgba(18,113,175,1)), color-stop(50%,rgba(18,113,175,1)), color-stop(100%,rgba(9,85,146,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(9,85,146,1) 0%,rgba(18,113,175,1) 6%,rgba(18,113,175,1) 50%,rgba(9,85,146,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(9,85,146,1) 0%,rgba(18,113,175,1) 6%,rgba(18,113,175,1) 50%,rgba(9,85,146,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(9,85,146,1) 0%,rgba(18,113,175,1) 6%,rgba(18,113,175,1) 50%,rgba(9,85,146,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(9,85,146,1) 0%,rgba(18,113,175,1) 6%,rgba(18,113,175,1) 50%,rgba(9,85,146,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#095592', endColorstr='#095592',GradientType=0 ); /* IE6-9 */
+    color: #fff !important;
+    font-family: 'Raleway-Bold', Arial, Helvetica;
+}
+blockquote, address {
+  padding: 10px;
+    border-left: 2px solid #095592;
+    background: #fff; /* Old browsers */
+background: -moz-linear-gradient(left,  #0099ff 0%, #0033cc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#0099ff), color-stop(100%,#0033cc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #0099ff 0%,#0033cc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #0099ff 0%,#0033cc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #0099ff 0%,#0033cc 100%); /* IE10+ */
+background: linear-gradient(to right,  #0099ff 0%,#0033cc 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0099ff', endColorstr='#0033cc',GradientType=1 ); /* IE6-9 */
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+address {
+    border-left: none;
+}
+div.contenidoNoticia h2 {
+        font-family: 'Raleway-Regular', Arial, Helvetica;
+    padding: 1px;
+   color: #2B879E;
+border-bottom: 1px solid #2B879E;
+margin: 10px 3px;
+}
+div.contenidoNoticia h3, div.contenidoNoticia h6 {
+    background: #0099ff;
+margin: 10px 3px;
+}
+div.contenidoNoticia a, div.contenidoNoticia a:visited, div.contenidoNoticia a:active {
+	color: #0099ff;
+}
+div.contenidoNoticia a:hover {
+	color: #fcfcfc
+}
