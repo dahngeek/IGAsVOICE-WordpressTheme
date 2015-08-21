@@ -26,9 +26,9 @@ get_header();
 					<div class="jms-content">
 						<h3><?php the_title(); ?></h3>
 					<p><?php the_excerpt(); ?></p>
-						<a class="jms-link" href="<?php the_permalink(); ?>">Read more</a>
+						<a class="jms-link" href="<?php the_permalink(); ?>">LEER MÁS</a>
 					</div>
-					<img src="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' );
+					<img class="hvr-grow-rotate" src="<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' );
 echo($thumb['0']); ?>" />
 				</div>
 				<?php $i = $i + 1;?>
@@ -56,15 +56,15 @@ echo($thumb['0']); ?>" />
 			<br><h1>Lo nuevo en IGA's Voice</h1><br>
 
 			<?php
-			$the_query = new WP_Query( array( 'post__not_in' => get_option( 'sticky_posts' ) ) );
+			$the_query = new WP_Query( array( 'post__not_in' => get_option( 'sticky_posts' ) , 'category__not_in' => array(17, 16)) );
 			?>
 			<?php if ( $the_query->have_posts() ) : ?>
 				<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-				<div class="contenedor">
+				<div class="contenedor ">
 				<div class="elemento">
 				<div class="imagCont" style="background:url(<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' ); if ($thumb) {echo($thumb['0']);} else { bloginfo('template_url'); echo "/img/".mt_rand(6, 32).".jpg";} ?>);background-size: cover;">
 					<a href="<?php the_permalink(); ?>" alt="<?php the_title();?>">
-						<h2><?php the_title();?></h2>
+						<h2 class="hvr-underline-from-center hvr-pulse-grow"><?php the_title();?></h2>
 					</a>
 				</div>
 				<?php the_excerpt(); ?>

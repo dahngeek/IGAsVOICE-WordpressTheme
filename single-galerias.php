@@ -28,6 +28,7 @@ get_header();
                 <?php
                 else:
                     the_content();
+					the_excerpt();
         		endif;
     			?>
 			</div>
@@ -36,6 +37,10 @@ get_header();
 				<?php endif; ?>
 		</section>
 		<aside>
+			<h1 style="margin-top: -40px; color:#fff;">Comenta y Opina :)</h1>
+			<div id="disqus" style="padding:2px 3px;">
+				<?php comments_template(); ?>
+			</div>
 		<!--<div class="setsnav">
 				<nav class="codrops-demos">
 				<a class="current-demo" href="galeria.html">Set 1</a>

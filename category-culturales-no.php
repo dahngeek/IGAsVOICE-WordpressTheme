@@ -2,10 +2,10 @@
 get_header();
 ?>
 <section class="main">
-			<h2>Articulos <?php echo single_cat_title("",false); ?> IGA's Voice</h2><br>
+			<h2>Articulos Culturales IGA's Voice</h2><br>
            		<section class="ib-container" id="ib-container">
            			<?php
-			$id = get_cat_id( single_cat_title("",false) );
+			$id = get_option("categ-cultural");
 			//echo $id;
 			$args = array ('cat' => $id);
 			$the_query = new WP_Query($args);
@@ -25,53 +25,43 @@ get_header();
 			</section>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-
+				
 				var $container	= $('#ib-container'),
 					$articles	= $container.children('article'),
 					timeout;
-
+				
 				$articles.on( 'mouseenter', function( event ) {
-
+						
 					var $article	= $(this);
 					clearTimeout( timeout );
 					timeout = setTimeout( function() {
-
+						
 						if( $article.hasClass('active') ) return false;
-
+						
 						$articles.not( $article.removeClass('blur').addClass('active') )
 								 .removeClass('active')
 								 .addClass('blur');
-
+						
 					}, 65 );
-
+					
 				});
-
+				
 				$container.on( 'mouseleave', function( event ) {
-
+					
 					clearTimeout( timeout );
 					$articles.removeClass('active blur');
-
+					
 				});
-
+			
 			});
 		</script>
 		</section>
-		<aside style="height:auto;">
-			<div class="flexsearch">
-				<div class="flexsearch--wrapper">
-					<form class="flexsearch--form" action="/" method="get">
-						<div class="flexsearch--input-wrapper">
-							<input class="flexsearch--input" name="s" type="search" placeholder="search">
-						</div>
-						<input class="flexsearch--submit" type="submit" value="&#10140;"/>
-					</form>
-				</div>
-		</div>
+		<aside>
 			<div id="barraLat">
 			<?php dynamic_sidebar( 'main-sidebar' ); ?>
 			</div>
 		</aside>
-		<div class="clearfix"></div>
+		
 
 <?php
 get_footer();

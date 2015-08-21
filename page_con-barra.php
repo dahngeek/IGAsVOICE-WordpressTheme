@@ -5,13 +5,7 @@ get_header();
 
 		<section class="main">
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-		<?php 
-			$ocultar = get_post_meta( get_the_ID(), 'ocultar_titulo' );
-			//debug($ocultar);
-			if (!empty($ocultar)) {
-		?>
 			<h1><?php the_title(); ?></h1><br>
-			<?php }?>
 			<small id="postInfo"><?php setlocale(LC_TIME, "es_ES"); ?><?php echo strftime("%d de %B de %Y"); ?></small>
 
 			<div class="contenidoNoticia" style="margin-top:10px;">
@@ -27,9 +21,9 @@ get_header();
 		<aside>
 			<div class="flexsearch">
 				<div class="flexsearch--wrapper">
-					<form class="flexsearch--form" action="/" method="get">
+					<form class="flexsearch--form" action="#" method="post">
 						<div class="flexsearch--input-wrapper">
-							<input class="flexsearch--input" name="s" type="search" placeholder="search">
+							<input class="flexsearch--input" type="search" placeholder="search">
 						</div>
 						<input class="flexsearch--submit" type="submit" value="&#10140;"/>
 					</form>

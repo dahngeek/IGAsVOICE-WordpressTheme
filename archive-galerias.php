@@ -3,7 +3,7 @@ get_header();
 ?>
 <section class="main">
 	<h1>Galería IGA's Voice</h1><br>
-		<div class="grid">
+		<div class="grid" style="margin-top:40px">
 			<?php
 				if (isset($_GET['ver'])) {
 					global $query_string;
@@ -16,17 +16,28 @@ get_header();
 								 query_posts( $query_string . '&tag=videos' );
 								 $busca = "videos";
 								break;
+						case 'igasfilm':
+								 query_posts( $query_string . '&tag=igasfilm' );
+								 $busca = "igasfilm";
+								break;
 						case 'todo':
 								 $busca = "todo";
+									global $wp_query;
+									$iga70id = get_term_by('slug','iga70', 'post_tag');
+									$args = array_merge( $wp_query->query_vars, array( 'tag__not_in' => array($iga70id->term_id), 'posts_per_page' => 100) );
+									//var_dump($args);
+									query_posts( $args );
 								break;
 						case 'fotos':
 									$busca = "fotos";
 									$fotosid = get_term_by('slug','videos', 'post_tag');
 									$infosid = get_term_by('slug','infografias', 'post_tag');
+									$filmid = get_term_by('slug','igasfilm', 'post_tag');
+									$iga70id = get_term_by('slug','iga70', 'post_tag');
 									//var_dump($fotosid);
 									//var_dump($infosid);
 									global $wp_query;
-									$args = array_merge( $wp_query->query_vars, array( 'tag__not_in' => array($infosid->term_id, $fotosid->term_id), 'posts_per_page' => 100) );
+									$args = array_merge( $wp_query->query_vars, array( 'tag__not_in' => array($infosid->term_id, $fotosid->term_id,$filmid->term_id,$iga70id->term_id), 'posts_per_page' => 100) );
 									//var_dump($args);
 									query_posts( $args );
 								break;
@@ -36,8 +47,23 @@ get_header();
 					}
 				} else {
 					$busca = "todo";
+					global $wp_query;
+									$iga70id = get_term_by('slug','iga70', 'post_tag');
+									$args = array_merge( $wp_query->query_vars, array( 'tag__not_in' => array($iga70id->term_id), 'posts_per_page' => 100) );
+									//var_dump($args);
+									query_posts( $args );
 				}
 			?>
+		<?php if ($busca != "igasfilm") {?>
+	<div class="setsnav">
+			<nav class="codrops-demos" style="margin-top:-37px">
+			<a class="<?php if($busca == "todo") {echo "current-demo";} else {echo "none";} ?>" href="?ver=todo">TODO</a>
+			<a class="<?php if($busca == "fotos") {echo "current-demo";} else {echo "none";} ?>" href="?ver=fotos">FOTOS</a>
+			<a class="<?php if($busca == "videos") {echo "current-demo";} else {echo "none";} ?>" href="?ver=videos">VIDEOS</a>
+			<a class="<?php if($busca == "infografias") {echo "current-demo";} else {echo "none";} ?>" href="?ver=infografias">INFOGRAFÍAS</a>
+			</nav>
+		</div>
+	<?php } ?>
 			<?php if ( have_posts() ) : ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 			<figure class="effect-goliath">
@@ -60,7 +86,8 @@ get_header();
 	        	endif;
 				}
 				?>
-				<img src="<?php echo $imagen; ?>" alt=""/>
+				<div class="img" style="background:url(<?php echo $imagen; ?>);background-size:cover;"></div>
+				
 				<figcaption>
 					<h2><?php the_title(); ?><span></span></h2>
 					<p><?php echo substr(get_the_excerpt(), 0, 30)." [...]"; ?></p>
@@ -72,6 +99,7 @@ get_header();
 		</div>
 </section>
 <aside>
+	<?php if ($busca != "igasfilm") {?>
 	<div class="setsnav">
 			<nav class="codrops-demos">
 			<a class="<?php if($busca == "todo") {echo "current-demo";} else {echo "none";} ?>" href="?ver=todo">TODO</a>
@@ -80,6 +108,7 @@ get_header();
 			<a class="<?php if($busca == "infografias") {echo "current-demo";} else {echo "none";} ?>" href="?ver=infografias">INFOGRAFÍAS</a>
 			</nav>
 		</div>
+	<?php } ?>
 <div class="flexsearch">
 		<div class="flexsearch--wrapper">
 			<form class="flexsearch--form" action="/" method="get">

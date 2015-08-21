@@ -17,12 +17,89 @@
 		wp_enqueue_script( 'comment-reply' );
 	wp_head();
 ?>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=475px, initial-scale=1, maximum-scale=1">
+	<style>
+	/*Colores*/
+		<?php $items = get_option('colores-bar'); ?>
+			nav ul li a .color-1, .color-1 {
+				background:<?php echo (!empty($items["1"]) ? $items["1"] : '')?>;
+			}
+			nav ul li a .color-2, .color-2 {
+				background:<?php echo (!empty($items["2"]) ? $items["2"] : '')?>;
+			}
+			nav ul li a .color-3, .color-3 {
+				background:<?php echo (!empty($items["3"]) ? $items["3"] : '')?>;
+			}
+			nav ul li a .color-4, .color-4 {
+				background:<?php echo (!empty($items["4"]) ? $items["4"] : '')?>;
+			}
+			nav ul li a .color-5, .color-5 {
+				background:<?php echo (!empty($items["5"]) ? $items["5"] : '')?>;
+			}
+		nav ul li a .color-6, .color-6 {
+				background:<?php echo (!empty($items["6"]) ? $items["6"] : '')?>;
+			}
+		nav > ul > li > ul {
+			background: <?php echo (!empty($items["sub"]) ? $items["sub"] : '')?>;
+		}
+		nav > ul {
+			background: <?php echo (!empty($items["fondo"]) ? $items["fondo"] : '')?>;
+		}
+		.step img {
+			width: 450px;
+		}
+		.jms-content {
+			margin: 0px 470px 0px 20px;
+		}
+		.step  p{
+			font-size: 25px;
+		}
+		.mejs-audiotheme-mark {
+  display: none !important;
+}
+	</style>
 </head>
 
 
 <body <?php body_class(); ?>>
-<img id="bg" src="<?php bloginfo('template_url');?>/img/34.jpg"  alt="background" />
+	<?php 
+	$fondos =  get_option('fondos-arr');
+	//debug($fondos);
+	$fondo = 'http://www.igasvoice.net/wp-content/uploads/2015/06/beeple_tumblr_nd1uwdqMB61r20fq5o1_1280.jpg';
+	if(is_page()) {
+		foreach($fondos['page'] as $id => $link) {
+			if (is_page($id)) {$fondo = $link;}
+		}
+	} else if(is_category()) {
+		foreach($fondos['categ'] as $id => $link) {
+			if (is_category($id)) {$fondo = $link;}
+		}
+	} else if(is_singular('galerias')) {
+		global $post;
+		global $wp_query;
+		$post_id = $wp_query->post->ID;
+		$slug = get_post( $post )->post_name;
+		foreach($fondos['gallery'] as $id => $link) {
+			if ($id == $slug || $id == $post_id ) {$fondo = $link;}
+		}
+	} else if(is_single()) {
+		foreach($fondos['noticia'] as $id => $link) {
+			if (is_single($id)) {$fondo = $link;}
+		}
+	} else if(is_post_type_archive( 'galerias' )) {
+		if(isset($fondos['gal'])) {
+			foreach($fondos['gal'] as $id => $val) {
+				$fondo = $val;
+			}
+		}
+	}
+	else if(is_home()){
+		if (isset($fondos['page']['noticias'])) {
+			$fondo = $fondos['page']['noticias'];
+		}
+	}
+	?>
+<img id="bg" src="<?php echo $fondo;?>"  alt="background" />
 <section class="contenido1">
 	<span class="ir-arriba icon-arrow-up"></span>
 	<script>
@@ -44,9 +121,9 @@
 	</script>
 	<div id="caja_radio">
 		<div class="home"><a href="<?php bloginfo('url'); ?>"><span class="home"><i class="icon icon-home"></i></span></a></div>
-		<a href="<?php bloginfo('url'); ?>"><img id="IGA" src="<?php bloginfo('template_url');?>/7.png" alt=""></a>
-		<div id="radio"><h1> Radio Aqui </h1>
-			<img id="IGA_radio" src="<?php bloginfo('template_url');?>/7.png" alt="">
+		<a id="igalogo" href="<?php bloginfo('url'); ?>"><img class="hvr-grow-rotate" id="IGA" src="<?php bloginfo('template_url');?>/7.png" alt=""></a>
+		<div id="encabeza" style="  position: Absolute;  width: 54%;  height: 150px;  margin-top: -164px;  margin-left: 21%;  /* padding: 55px; */  7* border: 5px dashed #660000;*/">
+  			<?php dynamic_sidebar( 'main-encabezado' ); ?>
 		</div>
 	</div>
 	<div class="content2">
@@ -80,6 +157,8 @@
 		<nav>
 
 <?php
+global $wp_query;
+       $post_id = $wp_query->get_queried_object_id();
 		$locations = get_registered_nav_menus();
 		$menus = wp_get_nav_menus();
 		$menu_locations = get_nav_menu_locations();
@@ -102,6 +181,7 @@ foreach ($menus as $menu) {
 			if ($menu_item->menu_item_parent == 0) {
 				$i =  $menu_item->ID;
 				$menuArr[$i]["titulo"] = $menu_item->title;
+				$menuArr[$i]["id"] = $menu_item->object_id;
 				$menuArr[$i]["url"] = $menu_item->url;
 				$menuArr[$i]["icononame"] = $menu_item->attr_title;
 			} else {
@@ -120,7 +200,11 @@ foreach ($menus as $menu) {
 <?php
 $i = 1;
 	foreach ($menuArr as $key => $itemdelmenu) {
-		echo '<li class="item-'.$i.'" >';
+		echo '<li class="item-'.$i;
+		if ($itemdelmenu["id"] == $post_id) {
+			echo " activo";
+		}
+		echo '">';
 		echo '<a href="'.$itemdelmenu["url"].'"><span class="color-'.$i.'"><i class="icon '.$itemdelmenu["icononame"].'"></i></span>'.$itemdelmenu["titulo"].'</a>';
 		if (isset($itemdelmenu["h"])) {
 			echo "<ul>";

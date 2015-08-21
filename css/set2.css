@@ -13,7 +13,7 @@
 	position: relative;
 	float: left;
 	overflow: hidden;
-	margin: 10px 1%;
+	margin: 10px 5px;
 	min-width: 320px;
 	max-width: 480px;
 	min-height: 273px;
@@ -25,6 +25,13 @@
 }
 
 .grid figure img {
+	position: relative;
+	display: block;
+	min-height: 100%;
+	max-width: 100%;
+	opacity: 0.8;
+}
+.grid figure div.img {
 	position: relative;
 	display: block;
 	min-height: 100%;
@@ -178,16 +185,21 @@ figure.effect-goliath {
 }
 
 figure.effect-goliath img,
-figure.effect-goliath h2 {
-	-webkit-transition: -webkit-transform 0.35s;
-	transition: transform 0.35s;
+figure.effect-goliath h2, figure.effect-goliath div.img {
+	-webkit-transition: linear 0.35s;
+	transition: linear 0.35s;
 }
 
-figure.effect-goliath img {
+figure.effect-goliath img, figure.effect-goliath div.img {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 }
-
+figure.effect-goliath div.img {
+	  min-width: 100%;
+  min-height: 100%;
+  width: 400px;
+  height: 273px;
+}
 figure.effect-goliath h2,
 figure.effect-goliath p {
 	position: absolute;
@@ -209,6 +221,11 @@ figure.effect-goliath p {
 figure.effect-goliath:hover img {
 	-webkit-transform: translate3d(0,-80px,0);
 	transform: translate3d(0,-80px,0);
+}
+figure.effect-goliath:hover div.img {
+	-webkit-transform: translate3d(0,-80px,0);
+	transform: translate3d(0,-80px,0);
+	opacity: 1;
 }
 
 figure.effect-goliath:hover h2 {

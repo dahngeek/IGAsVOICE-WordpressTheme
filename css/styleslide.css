@@ -1,10 +1,10 @@
 
 .jms-slideshow {
 	position: relative;
-	width: 80%;
+	width: 100%;
 }
 .jms-wrapper {
-	width: 120%;
+	width: 100%;
 	min-width:auto;
 	height: 350px;
 	background-color: #fff;
@@ -123,7 +123,7 @@ a.jms-link{
 	position: absolute;
 	text-align: center;
 	left: 0px;
-	bottom: 20px;
+	bottom: 20px !important;
 	/*z-index: 9999;*/
 	-webkit-user-select: none;
 	-moz-user-select: none;

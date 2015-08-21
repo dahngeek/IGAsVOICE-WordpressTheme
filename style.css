@@ -3,14 +3,98 @@ Theme Name: IGAsVOICETheme
 Theme URI: http://dahngeek.com/
 Description: Tema personalizado y original para IGAsVOICE
 Author: DiagramacionTeamIGA
-Version: 2.0
+Version: 2.2
 Tags: iga, team, igasvoice
 */
+
+/*.main {
+	background: rgba(255,255,255,0.8) !important;
+	color: #000 !important;
+}*/
+
+#igalogo:hover {
+	-moz-animation-direction:alternate;-moz-animation-duration:.5s;-moz-animation-iteration-count:1;-moz-animation-name:rotate_bounce;-moz-animation-timing-function:ease-out;-webkit-animation-direction:alternate;-webkit-animation-duration:.5s;-webkit-animation-iteration-count:1;-webkit-animation-name:rotate_bounce;-webkit-animation-timing-function:ease-out;
+}
+body.home .contenedor{
+	margin-left: 18px !important;
+}
 .clearfix {
   content:"";
   display:table;
   clear:both;
 }
+
+.hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #2098d1;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+/* Pulse Grow */
+@-webkit-keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+.hvr-pulse-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {
+  -webkit-animation-name: hvr-pulse-grow;
+  animation-name: hvr-pulse-grow;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
+
+
 #barraLat {
   width: 95%;
   margin: 10px auto;
@@ -28,6 +112,66 @@ Tags: iga, team, igasvoice
   padding: 3px;
   border-radius: 3px;
   line-height: 28px;
+}
+div.content aside {
+	padding: 4px !important;
+}
+.latest-tweets {
+	background-color:#269;
+background-image: linear-gradient(white 2px, transparent 2px),
+linear-gradient(90deg, white 2px, transparent 2px),
+linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+background-size:100px 100px, 100px 100px, 10px 10px, 10px 10px;
+background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+	padding: 5px;
+}
+
+.latest-tweets > ul {
+
+}
+
+.latest-tweets > ul > li {
+	background-color: #fff; 
+background-image: linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 1.2em;
+	padding: 6px 2px 2px 2px;
+	opacity: 0.8;
+	font-size: 10pt;
+	line-height: 6pt;
+	line-break: break-word;
+	margin: 2px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+.latest-tweets > ul > li:hover {
+	opacity: 1;
+}
+
+.tweet-text {
+}
+
+.tweet-text > a {
+	background: #abcbe7;
+}
+
+.twitter-hashtag {
+	font-weight: bold;
+}
+
+.tweet-details {
+	background: #000;
+	color: #fff;
+	text-align: center;
+}
+
+.tweet-details > a {
+}
+
+.tweet-details > a > time {
+}
+
+.twitter-screen-name {
 }
 
 iframe{
@@ -240,4 +384,52 @@ div.contenidoNoticia a, div.contenidoNoticia a:visited, div.contenidoNoticia a:a
 }
 div.contenidoNoticia a:hover {
 	color: #fcfcfc
+}
+/* Grow Rotate */
+.hvr-grow-rotate {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {
+  -webkit-transform: scale(1.1) rotate(4deg);
+  transform: scale(1.1) rotate(4deg);
+}
+
+/* Float */
+.hvr-float {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
+}
+
+.cue-tracks{
+  max-height: none !important;
+}
+.ir-arriba {
+  z-index: 9999;
 }

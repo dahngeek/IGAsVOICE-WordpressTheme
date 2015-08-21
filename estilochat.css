@@ -1,0 +1,28 @@
+.header-icon,.info {
+	display: none;
+}
+body {
+	margin-bottom: 60px;
+	overflow: hidden;
+}
+.message-input {
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+}
+.post-avatar--troll {
+	background-color: rgba(0, 161, 255, 0.6);
+	color: rgba(0,0,0,0.8);
+}
+.header-bar {
+	display: none;
+}
+.panel-button-slider {
+background-color: rgba(0, 161, 255, 0.6);
+}
+#scroll_down .show {
+	bottom: 71px !important;
+}
+.input-text {
+	background-color: rgba(255,255,255,0.8);
+	color: rgba(0,0,0,0.7);
+}

@@ -4,7 +4,13 @@ get_header();
 ?>
 		<section class="main">
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+			<?php 
+			$ocultar = get_post_meta( get_the_ID(), 'ocultar_titulo' );
+			//debug($ocultar);
+			if (!$ocultar[0]) {
+		?>
 			<h1><?php the_title(); ?></h1><br>
+			<?php }?><br>
 			<div class="imagen">
 				<?php the_content(); ?>
 			</div>

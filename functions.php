@@ -47,12 +47,12 @@ function get_the_styles() {
         wp_enqueue_style('temablur', get_bloginfo( 'stylesheet_directory' ).'/css/demoblur.css', array("themeStyle"));
         wp_enqueue_style('styleblur', get_bloginfo( 'stylesheet_directory' ).'/css/styleblur.css', array("themeStyle"));
     }
-    if (is_singular( 'galerias' ) || is_page_template('page_sin-barra.php')) {
+    if (is_singular( 'galerias' ) || is_page_template('page_sin-barra.php') || is_page('iga-70a')) {
         wp_enqueue_style('stylegaleria', get_bloginfo( 'stylesheet_directory' ).'/css/stylegalery.css', array("themeStyle"));
         wp_enqueue_style('stylegalery', get_bloginfo( 'stylesheet_directory' ).'/css/stylegaleria.css', array("themeStyle"));
         wp_enqueue_style('stylezoom', get_bloginfo( 'stylesheet_directory' ).'/css/stylezoom.css', array("themeStyle"));
     }
-    if (is_post_type_archive( 'galerias' )) {
+    if (is_post_type_archive( 'galerias' ) || is_page('iga-70a')) {
         wp_enqueue_style('stylegalery', get_bloginfo( 'stylesheet_directory' ).'/css/stylegaleria.css', array("themeStyle"));
         wp_enqueue_style('set2', get_bloginfo( 'stylesheet_directory' ).'/css/set2.css', array("themeStyle"));
     }
@@ -167,6 +167,20 @@ function custom_foot() {
 
 // Hook into the 'widgets_init' action
 add_action( 'widgets_init', 'custom_foot' );
+
+function encabezado_wid() {
+	$args = array(
+        'id'            => 'main-encabezado',
+        'name'          => __( 'Contenido Encabezado', 'text_domain' ),
+        'description'   => __( 'contenido que irá en el encabezado, al lado del logo.', 'text_domain' ),
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+    );
+    register_sidebar( $args );
+}
+add_action( 'widgets_init', 'encabezado_wid' );
 //Cambiamos el largo de excerpt
 function custom_excerpt_length( $length ) {
     return 20;
@@ -185,7 +199,7 @@ function cambiarTituloLogin(){
 
 //set favicon
 function blogFavicon() {
-	echo '<link rel="Shortcut Icon" type="image/x-icon" href="'.get_bloginfo('template_url').'/media/imagenes/generales/favicon.ico" />';
+	echo '<link rel="Shortcut Icon" type="image/x-icon" href="'.get_bloginfo('template_url').'/media/imagenes/generales/favicon.png" />';
 }
 
 function setUpdateMode() {
@@ -421,4 +435,132 @@ add_filter('admin_footer_text', 'wpfme_footer_admin');
 // Disable the theme / plugin text editor in Admin
 define('DISALLOW_FILE_EDIT', true);
 
+add_action('admin_menu', 'register_my_custom_submenu_page');
+
+function register_my_custom_submenu_page() {
+	add_submenu_page( 'themes.php', 'Fondos de Página', 'Fondos de página', 'manage_options', 'fondos-pagina', 'my_custom_submenu_page_callback' );
+}
+
+function my_custom_submenu_page_callback() {
+	if (isset($_POST['submit'])) {
+		//debug($_POST);
+		$arreglo = array();
+		foreach($_POST as $key => $val){
+			if($key != 'submit' && $key != 'tipo'){
+				foreach ($val as $k=>$vv){
+					if (!empty($_POST["slug"][$k])) {
+                        $tipo = $_POST["tipo"][$k];
+                        $arreglo[$tipo][$_POST["slug"][$k]] = $_POST["link"][$k];
+                    }
+				}
+			}
+		}
+		//debug($arreglo);
+		$guardaFondos = update_option('fondos-arr' , $arreglo);
+		//debug($guardaFondos);
+	}
+	echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
+		echo '<h2>Editar los fondos de Pantalla</h2>';
+	echo '</div>';
+	?>
+		<form method="post">
+			<?php 
+			$fondos =  get_option('fondos-arr');
+	//debug($fondos);
+			if(!empty($fondos)){
+				foreach($fondos as $key => $value){
+					foreach($value as $id => $link) {
+						?>
+			<select name="tipo[]" id="tipode">
+				<option value="categ" <?php echo ($key == 'categ' ? 'selected' :'')?></optio>Categoría</option>
+				<option value="page" <?php echo ($key == 'page' ? 'selected' :'')?>>Pagina</option>
+				<option value="noticia" <?php echo ($key == 'noticia' ? 'selected' :'')?>>Noticia</option>
+				<option value="gallery" <?php echo ($key == 'gallery' ? 'selected' :'')?>>Galería Individual</option>
+				<option value="gal" <?php echo ($key == 'gal' ? 'selected' :'')?>>Galería General</option>
+			</select>
+			<input type="text" name="slug[]" value="<?php echo $id;?>" placeholder="Slug o ID">
+			<input type="text" name="link[]" value="<?php echo $link;?>" placeholder="Link a la Imagen">
+			<br>
+					<?php
+					}
+				}
+			}
+			?>
+			<h3>Añadir Nueva</h3>
+			<select name="tipo[]" id="tipode">
+				<option value="categ">Categoría</option>
+				<option value="page">Pagina</option>
+				<option value="noticia">Noticia</option>
+				<option value="gallery">Galería Individual</option>
+				<option value="gal">Galería General</option>
+			</select>
+			<input type="text" name="slug[]" placeholder="Slug o ID">
+			<input type="text" name="link[]" placeholder="Link a la Imagen">
+			<br>
+			<input type="submit" name="submit" value="Guardar Todo">
+		</form>
+	<?php
+}
+
+add_action('admin_menu', 'registrar_colores_subpage');
+
+function registrar_colores_subpage() {
+	add_submenu_page( 'themes.php', 'Colores', 'Colores', 'manage_options', 'colores-pagina', 'colores_callback' );
+}
+function colores_callback() {
+	if(isset($_POST['enviarbarra'])) {
+		//debug($_POST['mainbar']);
+		$guardarcolores = update_option('colores-bar', $_POST['mainbar']);
+	}
+	$items = get_option('colores-bar');
+	?>
+	<h2>Colores de Cabecera</h2>
+	<form method="post">
+	<label for="mainbar[fondo]">Fondo Barra:</label><input class="color-field" type="text" name="mainbar[fondo]" placeholder="#9FEB07" <?php echo (!empty($items["fondo"]) ? 'value="'.$items["fondo"].'"' : '')?>>
+		<br>
+	<label for="mainbar[sub]">Fondo SubMenu:</label><input class="color-field" type="text" name="mainbar[sub]" placeholder="#000" <?php echo (!empty($items["sub"]) ? 'value="'.$items["sub"].'"' : '')?>>
+		<br>
+	<label for="mainbar[1]">Item 1:</label><input type="text"  class="color-field"name="mainbar[1]" placeholder="#F2D694" <?php echo (!empty($items["1"]) ? 'value="'.$items["1"].'"' : '')?>>
+		<br>
+	<label for="mainbar[2]">Item 2:</label><input type="text" class="color-field" name="mainbar[2]" placeholder="#2B879E" <?php echo (!empty($items["2"]) ? 'value="'.$items["2"].'"' : '')?>>
+		<br>
+	<label for="mainbar[3]">Item 3:</label><input type="text" class="color-field" name="mainbar[3]" placeholder="#FA2A00" <?php echo (!empty($items["3"]) ? 'value="'.$items["3"].'"' : '')?>>
+		<br>
+	<label for="mainbar[4]">Item 4:</label><input type="text" name="mainbar[4]" class="color-field" placeholder="#89B6A5" <?php echo (!empty($items["4"]) ? 'value="'.$items["4"].'"' : '')?>>
+		<br>
+	<label for="mainbar[5]">Item 5:</label><input type="text" class="color-field" name="mainbar[5]" placeholder="#F2D694" <?php echo (!empty($items["5"]) ? 'value="'.$items["5"].'"' : '')?>>
+		<br>
+	<label for="mainbar[6]">Item 6:</label><input type="text" class="color-field" name="mainbar[6]" placeholder="#174459" <?php echo (!empty($items["6"]) ? 'value="'.$items["6"].'"' : '')?>>
+		<br>
+	<input type="submit" name="enviarbarra">
+	</form>
+<style>
+	labe {
+		margin: 10px 5px;
+	}
+</style>
+<script>
+(function( $ ) {
+ 
+    // Add Color Picker to all inputs that have 'color-field' class
+    $(function() {
+        $('.color-field').wpColorPicker();
+    });
+     
+})( jQuery );
+</script>
+	<?php
+}
+add_action( 'admin_enqueue_scripts', 'wptuts_add_color_picker' );
+function wptuts_add_color_picker( $hook ) {
+ 
+    if( is_admin() ) { 
+     
+        // Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' ); 
+         
+        // Include our custom jQuery file with WordPress Color Picker dependency
+        wp_enqueue_script( 'custom-script-handle', plugins_url( 'custom-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true ); 
+    }
+}
 ?>

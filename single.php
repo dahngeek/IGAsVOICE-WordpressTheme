@@ -14,7 +14,10 @@ get_header();
 				<?php endwhile; else : ?>
 					<p><?php _e( 'No se encontró nada.' ); ?></p>
 				<?php endif; ?>
-
+			<div class="clearfix"></div>
+		<div id="disqus" style="background:#fff;padding: 0px 5px;margin-top:10px">
+			<?php comments_template(); ?>
+		</div>
 		</section>
 
 		<aside>
